@@ -1,28 +1,17 @@
-import {
-	Button,
-	Card,
-	CardBody,
-	CardFooter,
-	CardHeader,
-	VStack,
-	Heading,
-	SimpleGrid,
-	Text,
-	HStack,
-} from "@chakra-ui/react";
-import React, { FC, useEffect } from "react";
-import Layout from "../../components/Layout";
+import { Card, CardHeader, VStack, Heading, HStack, Icon } from "@chakra-ui/react";
+import React from "react";
 import { useRouter } from "next/router";
+import { RiGovernmentFill } from "react-icons/ri";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { BiBody } from "react-icons/bi";
 
-interface PitchProps {}
+const categoryPitchArray = [
+	{ heading: "Company", icon: BsFillPeopleFill },
+	{ heading: "Government", icon: RiGovernmentFill },
+	{ heading: "Individual", icon: BiBody },
+] as const;
 
-const categoryTab = [
-	{ heading: "company", description: "tata toto" },
-	{ heading: "government", description: "tata titi" },
-	{ heading: "individual", description: "tata tutu" },
-];
-
-const Pitch: FC<PitchProps> = ({}) => {
+const Pitch = () => {
 	const router = useRouter();
 	const handleCategoryClick = (category: string) => {
 		const route = `/pitch/${category}/step-1`;
@@ -33,19 +22,24 @@ const Pitch: FC<PitchProps> = ({}) => {
 		<VStack spacing="24px">
 			<Heading>You are : </Heading>
 			<HStack spacing="24px">
-				{categoryTab.map((category) => (
+				{categoryPitchArray.map((category) => (
 					<Card
 						key={category.heading}
 						onClick={() => {
-							handleCategoryClick(category.heading);
+							handleCategoryClick(category.heading.toLowerCase());
 						}}
 					>
-						<CardHeader>
+						<CardHeader
+							display={"flex"}
+							flexDirection={"column"}
+							alignItems={"center"}
+							justifyContent="center"
+							height={"300px"}
+							gap={"16px"}
+						>
+							<Icon as={category.icon} />
 							<Heading size="md">{category.heading}</Heading>
 						</CardHeader>
-						<CardBody>
-							<Text>{category.description}</Text>
-						</CardBody>
 					</Card>
 				))}
 			</HStack>
