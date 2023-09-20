@@ -8,7 +8,9 @@ const Home: NextPage = () => {
 
   return (
     <Flex w="100%" backgroundRepeat="no-repeat" backgroundSize="100%" flexDirection="column">
-      <Box w="90%" maxW="1200px" mx="auto" pt="20px"></Box>
+      <Box w="90%" maxW="1200px" mx="auto" pt="20px">
+        <h1>Petit test 🐬</h1>
+      </Box>
     </Flex>
   );
 };
