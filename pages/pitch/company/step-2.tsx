@@ -2,10 +2,10 @@ import { NextPage } from "next";
 import FormTemplate from "../../../components/FormTemplate/FormTemplate";
 import RadioGroupInput from "../../../components/FormTemplate/RadioGroupInput";
 import { useEffect, useState } from "react";
-import { individualMockedFormData } from "../../../components/FormTemplate/logic.helper";
+import { companyMockedFormData } from "../../../components/FormTemplate/logic.helper";
 
 const Step2: NextPage = () => {
-	const [stepForm, setStepForm] = useState({ ...individualMockedFormData[1] });
+	const [stepForm, setStepForm] = useState({ ...companyMockedFormData[1] });
 	useEffect(() => {
 		const stringifiedData = window.localStorage.getItem("categoryDataForm");
 		if (stringifiedData !== null) {

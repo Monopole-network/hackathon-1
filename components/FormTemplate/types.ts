@@ -1,5 +1,5 @@
 export interface FormTemplateProps {
 	previousPageUrl: string;
-	nextPageUrl: string;
+	nextPageUrl?: string;
 	children: React.ReactNode;
 }

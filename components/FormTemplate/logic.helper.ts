@@ -145,6 +145,7 @@ export type categoryDataForm = {
 	step: number;
 	categoryForm: CategoryMockedDataForm;
 };
+
 export const saveDataCategoryForm = (category: string, step: number, categoryForm: CategoryMockedDataForm) => {
 	if (window !== undefined) {
 		const localStorageCategoryDataForm = window.localStorage.getItem("categoryDataForm");
@@ -160,7 +161,17 @@ export const saveDataCategoryForm = (category: string, step: number, categoryFor
 			if (stringifiedCategoryDataForm === localStorageCategoryDataForm) {
 				return;
 			} else {
-				const stringifiedCategoryDataForm = JSON.stringify(newCategoryDataForm);
+				const localStorageCategory = JSON.parse(localStorageCategoryDataForm).category;
+				if (newCategoryDataForm.category !== localStorageCategory) {
+					const newCategoryDataForm: categoryDataForm = {
+						category,
+						step,
+						categoryForm: getCategoryForm(category),
+					};
+					const stringifiedCategoryDataForm = JSON.stringify(newCategoryDataForm);
+
+					return window.localStorage.setItem("categoryDataForm", stringifiedCategoryDataForm);
+				}
 
 				return window.localStorage.setItem("categoryDataForm", stringifiedCategoryDataForm);
 			}
@@ -204,7 +215,6 @@ export const getDataCategoryForm = (path?: string) => {
 	}
 
 	return localStorageCategoryDataForm;
-	// }
 };
 
 export const handleAnswerFormClick = (value: string, step: number) => {

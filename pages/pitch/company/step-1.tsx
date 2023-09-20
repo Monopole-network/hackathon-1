@@ -2,11 +2,10 @@ import { NextPage } from "next";
 import FormTemplate from "../../../components/FormTemplate/FormTemplate";
 import RadioGroupInput from "../../../components/FormTemplate/RadioGroupInput";
 import { useEffect, useState } from "react";
-import { individualMockedFormData } from "../../../components/FormTemplate/logic.helper";
-import { Spinner } from "@chakra-ui/react";
+import { companyMockedFormData } from "../../../components/FormTemplate/logic.helper";
 
 const Step1: NextPage = () => {
-	const [stepForm, setStepForm] = useState({ ...individualMockedFormData[0] });
+	const [stepForm, setStepForm] = useState({ ...companyMockedFormData[0] });
 	useEffect(() => {
 		const stringifiedData = window.localStorage.getItem("categoryDataForm");
 		if (stringifiedData !== null) {
