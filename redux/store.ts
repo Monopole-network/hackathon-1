@@ -1,9 +1,11 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { filtersSlice } from './reducers/filter';
+import { filtersSlice } from './reducers/filters';
+import { projectsSlice } from './reducers/projects';
 
 const store = configureStore({
   reducer: {
     filters: filtersSlice.reducer,
+    projects: projectsSlice.reducer,
   }
 });
 

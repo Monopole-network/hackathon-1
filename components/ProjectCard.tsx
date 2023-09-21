@@ -1,17 +1,6 @@
 import { Card, CardBody, CardFooter, Image } from "@chakra-ui/react";
 import { FC } from "react";
-
-export type ProjectCardProps = {
-  props: ProjectCardInfos;
-};
-
-export type ProjectCardInfos = {
-  image?: string;
-  title?: string;
-  description?: string;
-  type?: string;
-  odds?: string[];
-};
+import { ProjectCardProps } from "../redux/reducers/projects";
 
 const ProjectCard: FC<ProjectCardProps> = ({ props }) => {
   const { image, title, description, type, odds } = props;
