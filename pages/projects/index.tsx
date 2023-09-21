@@ -5,6 +5,7 @@ import { FormEvent } from "react";
 import ProjectCard, { ProjectCardInfos } from "../../components/ProjectCard";
 import React from "react";
 import CategoryButton from "../../components/CategoryButton";
+import SubFilter from "../../components/SubFilter";
 
 const exampleProjects: ProjectCardInfos[] = [
   {
@@ -103,6 +104,7 @@ const ProjectsPage: NextPage = () => {
             type: "charity",
           }}
         ></CategoryButton>
+        <SubFilter />
       </Flex>
       <Grid
         className="projects"

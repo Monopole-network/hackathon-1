@@ -32,9 +32,12 @@ export const filtersSlice = createSlice({
     deleteODD: (state, action: PayloadAction<string>) => {
       if (action.payload.trim().length === 0 || state.odds.includes(action.payload)) return
       state.odds.slice(state.odds.indexOf(action.payload), 1)
+    },
+    clearODD: (state) => {
+      state.odds = []
     }
   },
 })
 
-export const { reset, changeType, addODD, deleteODD } = filtersSlice.actions
+export const { reset, changeType, addODD, deleteODD, clearODD } = filtersSlice.actions
 export default filtersSlice.reducer
