@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import StepperList from "./StepperList/StepperList";
 import StepNavigationButton from "./StepNavigationButton";
 import { FormTemplateProps } from "./types";
-import { Container, Heading, Spinner } from "@chakra-ui/react";
-import { getDataCategoryForm, individualMockedFormData, categoryDataForm } from "./logic.helper";
+import { Container, Spinner } from "@chakra-ui/react";
+import { getDataCategoryForm } from "./logic.helper";
 
 const FormTemplate = ({ previousPageUrl, nextPageUrl, children }: FormTemplateProps) => {
 	const [actualStep, setActualStep] = useState<number>(0);
@@ -26,19 +26,33 @@ const FormTemplate = ({ previousPageUrl, nextPageUrl, children }: FormTemplatePr
 		}
 	}, [actualStep]);
 	return isLoading ? (
-		<Spinner />
-	) : (
-		<Container maxW="md" bg="none" color="white" gap="16px">
-			<Heading />
-			<StepperList stepList={data?.categoryForm} actualStep={actualStep} setActualStep={setActualStep} data={data} />
-			{children}
-			<StepNavigationButton
-				actualStep={actualStep}
-				previousPageUrl={previousPageUrl}
-				nextPageUrl={nextPageUrl}
-				data={data}
-			/>
+		<Container maxW="90%" bg="none" marginBottom={"16px"}>
+			<Spinner colorScheme={"green"} display={"flex"} justifyContent={"center"} alignItems={"center"} />
 		</Container>
+	) : (
+		<>
+			<Container maxW="90%" bg="none" marginBottom={"16px"}>
+				<StepperList stepList={data?.categoryForm} actualStep={actualStep} setActualStep={setActualStep} data={data} />
+			</Container>
+			<Container
+				maxW="70%"
+				bg="none"
+				gap="16px"
+				display={"flex"}
+				flexDirection={"column"}
+				alignItems={"center"}
+				marginBottom={"16px"}
+			>
+				{children}
+
+				<StepNavigationButton
+					actualStep={actualStep}
+					previousPageUrl={previousPageUrl}
+					nextPageUrl={nextPageUrl}
+					data={data}
+				/>
+			</Container>
+		</>
 	);
 };
 

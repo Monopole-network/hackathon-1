@@ -31,7 +31,7 @@ const StepNavigationButton = ({ actualStep, previousPageUrl, nextPageUrl, data }
 				<Button
 					size="lg"
 					className={styles.button_Next}
-					bg="var(--gradient-primary, linear-gradient(86deg, #8135ff 3.04%, #ff006b 101.29%))"
+					bg="#03CB88"
 					onClick={() => {
 						if (actualStep !== undefined) {
 							router.push(nextPageUrl);
@@ -44,7 +44,7 @@ const StepNavigationButton = ({ actualStep, previousPageUrl, nextPageUrl, data }
 				<Button
 					size="lg"
 					className={styles.button_Next}
-					bg="var(--gradient-primary, linear-gradient(86deg, #8135ff 3.04%, #ff006b 101.29%))"
+					bg="#03CB88"
 					onClick={() => {
 						console.log("to submit");
 					}}

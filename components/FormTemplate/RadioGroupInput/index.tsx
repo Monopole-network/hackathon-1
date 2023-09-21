@@ -15,6 +15,7 @@ const RadioInputGroup = ({ radioInputGroupdata, category, step }: radioInputData
 		<FormControl as="fieldset" isRequired>
 			<FormLabel as="legend">{radioInputGroupdata.question}</FormLabel>
 			<RadioGroup
+				colorScheme={"green"}
 				defaultValue={selectedValue ? selectedValue : radioInputGroupdata.answer[0]}
 				onChange={(value) => {
 					handleAnswerFormClick(value, step);
@@ -26,7 +27,7 @@ const RadioInputGroup = ({ radioInputGroupdata, category, step }: radioInputData
 					{radioInputGroupdata.answer.map((input, index) => {
 						return (
 							<Radio value={input} key={input}>
-								{index}&nbsp;-&nbsp;{input}
+								{index + 1}&nbsp;-&nbsp;{input}
 							</Radio>
 						);
 					})}
