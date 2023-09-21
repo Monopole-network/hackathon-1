@@ -2,26 +2,42 @@ import React from "react";
 import { Button, Card, CardBody, CardHeader, Checkbox, Collapse, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { addODD, clearODD } from "../redux/reducers/filters";
+import { mapByODD } from "../redux/reducers/projects";
 
 const subFilters: Array<object> = [
   {
     type: "environmental",
-    odds: ['Clean Water and Sanitation', 'Affordable and Clean Energy', 'Responsible Consumption and Production', 'Climate Action', 'Life Below Water', 'Life on Land'],
+    odds: [
+      "Clean Water and Sanitation",
+      "Affordable and Clean Energy",
+      "Responsible Consumption and Production",
+      "Climate Action",
+      "Life Below Water",
+      "Life on Land",
+    ],
   },
   {
     type: "social",
-    odds: ['No Poverty', 'Zero Hunger', 'Good Health and Well-being', 'Quality Education', 'Gender Equality', 'Reduced Inequality', 'Sustainable Cities and Communities', 'Peace, Justice, and Strong Institutions'],
+    odds: [
+      "No Poverty",
+      "Zero Hunger",
+      "Good Health and Well-being",
+      "Quality Education",
+      "Gender Equality",
+      "Reduced Inequality",
+      "Sustainable Cities and Communities",
+      "Peace, Justice, and Strong Institutions",
+    ],
   },
   {
     type: "economic",
-    odds: ['Decent Work and Economic Growth', 'Industry, Innovation, and Infrastructure'],
+    odds: ["Decent Work and Economic Growth", "Industry, Innovation, and Infrastructure"],
   },
   {
     type: "charity",
-    odds: ['Partnerships for the Goals'],
-  }
-]
+    odds: ["Partnerships for the Goals"],
+  },
+];
 
 const SubFilter: React.FC = () => {
   const [subfiltersArray, setSubfiltersArray] = React.useState<string[]>([]);
@@ -35,6 +51,7 @@ const SubFilter: React.FC = () => {
       subFilters.forEach((subfilter: any) => {
         if (subfilter.type === filter.type) {
           setSubfiltersArray(subfilter.odds);
+          setCheckState([]); // Reset check state
         }
       });
     }
@@ -44,11 +61,11 @@ const SubFilter: React.FC = () => {
 
   const handleChange = (e: any) => {
     let name: string = e.target.name;
-    name = name.replace(/\s+/g, '-').toLowerCase();
+    name = name.replace(/[\s+-,]/g, "_").toLowerCase();
     if (e.target.checked) {
       setCheckState([...checkState, name]);
     } else {
-      setCheckState(checkState.filter(name => name !== name));
+      setCheckState(checkState.filter((filterName) => filterName !== name));
     }
   };
 
@@ -56,16 +73,9 @@ const SubFilter: React.FC = () => {
     setIsDisplayed(!isDisplayed);
   };
 
-  const handleSubmit: any = () => {
-    checkState.forEach((checked: any) => {
-      dispatch(addODD(checked));
-    });
-  }
-
   const handleReset: any = () => {
     setCheckState([]); // Reset check state
-    dispatch(clearODD()); // Clear odds in redux store
-  }
+  };
 
   return (
     <>
@@ -86,7 +96,7 @@ const SubFilter: React.FC = () => {
                 <Checkbox
                   key={subfilter}
                   name={subfilter}
-                  isChecked={checkState.includes(subfilter.replace(/\s+/g, '-').toLowerCase())}
+                  isChecked={checkState.includes(subfilter.replace(/\s+/g, "_").toLowerCase())}
                   onChange={handleChange}
                 >
                   {subfilter}
@@ -94,7 +104,12 @@ const SubFilter: React.FC = () => {
               ))}
             </Stack>
             <Stack style={{ marginTop: 20 }} direction="row" align="left">
-              <Button variant="outline" onClick={handleSubmit}>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  dispatch(mapByODD(checkState));
+                }}
+              >
                 <SearchIcon />
               </Button>
               <Button variant="outline" onClick={handleReset}>

@@ -2,14 +2,15 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { Button, Container, Flex, FormControl, Grid, Input } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { FormEvent } from "react";
-import ProjectCard from "../../components/ProjectCard";
+import ProjectCard from "../components/ProjectCard";
 import React from "react";
-import CategoryButton from "../../components/CategoryButton";
-import { useAppSelector } from "../../hooks";
-import SubFilter from "../../components/SubFilter";
+import CategoryButton from "../components/CategoryButton";
+import { useAppSelector } from "../hooks";
+import SubFilter from "../components/SubFilter";
 
 const ProjectsPage: NextPage = () => {
   const projects = useAppSelector((state) => state.projects);
+  const filters = useAppSelector((state) => state.filters);
   const search = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
@@ -47,8 +48,14 @@ const ProjectsPage: NextPage = () => {
             type: "charity",
           }}
         ></CategoryButton>
-        <SubFilter />
       </Flex>
+      {filters.type !== undefined ? (
+        <Grid className="subfilters">
+          <SubFilter></SubFilter>
+        </Grid>
+      ) : (
+        <></>
+      )}
       <Grid
         className="projects"
         templateColumns={{ base: "repeat(1, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)" }}
