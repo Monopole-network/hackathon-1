@@ -6,7 +6,7 @@ export const globalStyles = {
     gray: {
       700: '#1f2733',
     },
-    royal: '#000126',
+    royal: '#000126'
   },
   styles: {
     global: (props: any) => ({
