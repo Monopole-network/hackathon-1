@@ -12,8 +12,9 @@ import {
 	Box,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { saveDataCategoryForm } from "../logic.helper";
-
+import styles from "./styles.module.css";
+import theme from "../../../styles/theme";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 type StepArrayProps = {
 	stepList: {
 		step: number;
@@ -34,14 +35,22 @@ const StepperList: React.FC<StepArrayProps> = ({ actualStep, stepList, data }: S
 		index: actualStep,
 		count: stepList?.length,
 	});
+	const isMobileView = useIsMobile();
 
 	return (
-		<Stepper index={activeStep} gap={"24px"}>
-			{stepList?.map((step, index) => (
+		<Stepper
+			index={activeStep}
+			gap="16px"
+			overflowX={"auto"}
+			colorScheme={"green"}
+			size="md"
+			margin="16px 0"
+			alignItems={"flex-start"}
+		>
+			{stepList?.map((step) => (
 				<Step
 					key={step.title}
 					onClick={() => {
-						// saveDataCategoryForm(data.category, index, data.categoryDataForm);
 						router.push(step.url);
 					}}
 				>
@@ -49,7 +58,7 @@ const StepperList: React.FC<StepArrayProps> = ({ actualStep, stepList, data }: S
 						<StepStatus complete={<StepIcon />} incomplete={<StepNumber />} active={<StepNumber />} />
 					</StepIndicator>
 
-					<Box flexShrink="0">
+					<Box>
 						<StepTitle>{step.title}</StepTitle>
 						<StepDescription>{step.description}</StepDescription>
 					</Box>
