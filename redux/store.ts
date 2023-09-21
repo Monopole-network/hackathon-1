@@ -1,7 +1,10 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
+import { filtersSlice } from './reducers/filter';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    filters: filtersSlice.reducer,
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

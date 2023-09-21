@@ -22,3 +22,50 @@ body {
   color: #e7e8e8;
   background: #0f1318;
 }
+
+.searchBar {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.projects {
+  margin-top: 2.5rem;
+}
+
+.projectCard {
+  .projectCard--body {
+    & div {
+      display: flex;
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+
+      & img {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: var(--card-radius) var(--card-radius) 0 0;
+      }
+    }
+  }
+
+  .projectCard--bottom {
+    display: flex;
+    flex-direction: column;
+
+    & h1 {
+      margin-bottom: 1rem;
+    }
+  }
+}
