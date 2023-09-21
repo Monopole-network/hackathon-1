@@ -3,7 +3,6 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 import DashboardBtn from "./DashboardBtn";
 import HomeBtn from "./HomeBtn";
 import ProjectsBtn from "./ProjectsBtn";
-import WorldBtn from "./WorldBtn";
 import PitchBtn from "./PitchButton";
 
 export default function MainMenu() {
@@ -16,7 +15,6 @@ export default function MainMenu() {
 				<ButtonGroup gap="8px">
 					<HomeBtn />
 					<ProjectsBtn />
-					<WorldBtn />
 					<PitchBtn />
 					<DashboardBtn />
 				</ButtonGroup>
