@@ -2,7 +2,8 @@ import { Button } from "@chakra-ui/react";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { CloseIcon } from "@chakra-ui/icons";
-import { changeType, reset } from "../redux/reducers/filter";
+import { changeType, resetFilters } from "../redux/reducers/filters";
+import { resetProjects, mapByType } from "../redux/reducers/projects";
 
 export type CategoryButtonProps = {
   props: CategoryButtonInfos;
@@ -16,8 +17,6 @@ export type CategoryButtonInfos = {
 const CategoryButton: FC<CategoryButtonProps> = ({ props }) => {
   const { color, type } = props;
   const filter = useAppSelector((state) => state.filters);
-  console.log("CategoryButton", filter);
-
   const dispatch = useAppDispatch();
 
   if (!filter.type || type !== filter.type) {
@@ -25,8 +24,9 @@ const CategoryButton: FC<CategoryButtonProps> = ({ props }) => {
       <Button
         colorScheme={color}
         onClick={() => {
-          dispatch(reset());
+          dispatch(resetFilters());
           dispatch(changeType(type));
+          dispatch(mapByType(type));
         }}
       >
         {type.replaceAll("_", "").toLocaleUpperCase()}
@@ -39,7 +39,8 @@ const CategoryButton: FC<CategoryButtonProps> = ({ props }) => {
       colorScheme={color}
       rightIcon={<CloseIcon w={2} h={2} />}
       onClick={() => {
-        dispatch(reset());
+        dispatch(resetFilters());
+        dispatch(resetProjects());
       }}
     >
       {type.replaceAll("_", "").toLocaleUpperCase()}
