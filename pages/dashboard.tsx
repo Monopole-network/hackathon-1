@@ -82,9 +82,9 @@ const Dashboard: NextPage = () => {
                                 <Input variant='outline' placeholder='Your activity sector' />
                                 <Text mb='8px'>Website URL</Text>
                                 <InputGroup size='sm'>
-                                    <InputLeftAddon children='https://' />
+                                    <InputLeftAddon>https://</InputLeftAddon>
                                     <Input placeholder='your website' />
-                                    <InputRightAddon children='.com' />
+                                    <InputRightAddon>.com</InputRightAddon>
                                 </InputGroup>
                                 <Text mb='8px'>Creation date of company</Text>
                                 <Input
@@ -140,7 +140,7 @@ const Dashboard: NextPage = () => {
                         <input type="text" id="website_url" name="website_url" value="your website URL" disabled />
                     </div>
                     <div className={styles.aboutBoxInput}>
-                        <label htmlFor="creation_date">Company's creation date</label>
+                        <label htmlFor="creation_date">Company&apos;s creation date</label>
                         <input type="text" id="creation_date" name="creation_date" value="your company's creation date" disabled />
                     </div>
                     <div className={styles.aboutBoxInput}>

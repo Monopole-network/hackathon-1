@@ -2,16 +2,16 @@ import React from "react";
 import { Button, Card, CardBody, CardHeader, Checkbox, Collapse, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { addODD, clearODD } from "../redux/reducers/filter";
+import { addODD, clearODD } from "../redux/reducers/filters";
 
 const subFilters: Array<object> = [
   {
     type: "environmental",
-    odds: ['Clean Water and Sanitation','Affordable and Clean Energy','Responsible Consumption and Production','Climate Action','Life Below Water','Life on Land'],
+    odds: ['Clean Water and Sanitation', 'Affordable and Clean Energy', 'Responsible Consumption and Production', 'Climate Action', 'Life Below Water', 'Life on Land'],
   },
   {
     type: "social",
-    odds: ['No Poverty','Zero Hunger','Good Health and Well-being','Quality Education','Gender Equality','Reduced Inequality' ,'Sustainable Cities and Communities','Peace, Justice, and Strong Institutions'],
+    odds: ['No Poverty', 'Zero Hunger', 'Good Health and Well-being', 'Quality Education', 'Gender Equality', 'Reduced Inequality', 'Sustainable Cities and Communities', 'Peace, Justice, and Strong Institutions'],
   },
   {
     type: "economic",
@@ -25,7 +25,7 @@ const subFilters: Array<object> = [
 
 const SubFilter: React.FC = () => {
   const [subfiltersArray, setSubfiltersArray] = React.useState<string[]>([]);
-	const [isDisplayed, setIsDisplayed] = React.useState<boolean>(false);
+  const [isDisplayed, setIsDisplayed] = React.useState<boolean>(false);
 
   const filter = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
@@ -52,9 +52,9 @@ const SubFilter: React.FC = () => {
     }
   };
 
-	const handleSubFilters: any = () => {
-		setIsDisplayed(!isDisplayed);
-	};
+  const handleSubFilters: any = () => {
+    setIsDisplayed(!isDisplayed);
+  };
 
   const handleSubmit: any = () => {
     checkState.forEach((checked: any) => {
@@ -67,23 +67,23 @@ const SubFilter: React.FC = () => {
     dispatch(clearODD()); // Clear odds in redux store
   }
 
-	return (
-		<>
-			<Stack direction="row" align="center">
-				<Button
-					colorScheme="blue"
-					onClick={handleSubFilters}
-					rightIcon={isDisplayed ? <ChevronUpIcon /> : <ChevronDownIcon />}
-				>
-					Filters
-				</Button>
-			</Stack>
-			<Collapse in={isDisplayed}>
-				<Card colorScheme="blue" style={{ marginTop: 20 }}>
-					<CardBody>
-						<Stack direction="column" align="left">
-							{subfiltersArray.map((subfilter: any) => (
-								<Checkbox
+  return (
+    <>
+      <Stack direction="row" align="center">
+        <Button
+          colorScheme="blue"
+          onClick={handleSubFilters}
+          rightIcon={isDisplayed ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        >
+          Filters
+        </Button>
+      </Stack>
+      <Collapse in={isDisplayed}>
+        <Card colorScheme="blue" style={{ marginTop: 20 }}>
+          <CardBody>
+            <Stack direction="column" align="left">
+              {subfiltersArray.map((subfilter: any) => (
+                <Checkbox
                   key={subfilter}
                   name={subfilter}
                   isChecked={checkState.includes(subfilter.replace(/\s+/g, '-').toLowerCase())}
@@ -91,21 +91,21 @@ const SubFilter: React.FC = () => {
                 >
                   {subfilter}
                 </Checkbox>
-							))}
-						</Stack>
-						<Stack style={{ marginTop: 20 }} direction="row" align="left">
-							<Button variant="outline" onClick={handleSubmit}>
-								<SearchIcon />
-							</Button>
-							<Button variant="outline" onClick={handleReset}>
-								<RepeatIcon />
-							</Button>
-						</Stack>
-					</CardBody>
-				</Card>
-			</Collapse>
-		</>
-	);
+              ))}
+            </Stack>
+            <Stack style={{ marginTop: 20 }} direction="row" align="left">
+              <Button variant="outline" onClick={handleSubmit}>
+                <SearchIcon />
+              </Button>
+              <Button variant="outline" onClick={handleReset}>
+                <RepeatIcon />
+              </Button>
+            </Stack>
+          </CardBody>
+        </Card>
+      </Collapse>
+    </>
+  );
 };
 
 export default SubFilter;
