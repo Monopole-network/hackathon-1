@@ -2,11 +2,11 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { Button, Container, Flex, FormControl, Grid, Input } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { FormEvent } from "react";
-import ProjectCard from "../../components/ProjectCard";
+import ProjectCard from "../components/ProjectCard";
 import React from "react";
-import CategoryButton from "../../components/CategoryButton";
-import { useAppSelector } from "../../hooks";
-import SubFilter from "../../components/SubFilter";
+import CategoryButton from "../components/CategoryButton";
+import { useAppSelector } from "../hooks";
+import SubFilter from "../components/SubFilter";
 
 const ProjectsPage: NextPage = () => {
   const projects = useAppSelector((state) => state.projects);
