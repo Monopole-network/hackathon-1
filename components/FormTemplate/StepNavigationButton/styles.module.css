@@ -1,0 +1,5 @@
+.button_Next {
+	border-radius: 16px;
+	border: 1px solid var(--gradient-white, rgba(255, 255, 255, 0.7));
+	background: var(--gradient-primary, linear-gradient(86deg, #8135ff 3.04%, #ff006b 101.29%));
+}
