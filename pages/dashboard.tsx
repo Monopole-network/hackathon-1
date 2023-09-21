@@ -68,33 +68,33 @@ const Dashboard: NextPage = () => {
                     <p>Edit Informations</p>
                 </button>
             </div>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Setup your Two-factor authentification</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Stack spacing={1}>
+                            <Text mb='8px'>Phone number</Text>
+                            <Input variant='outline' placeholder='Your phone number' />
+                            <Button colorScheme='green' mx="auto" mr="0" mt="10px">Send code</Button>
+                            <Text mb='8px'>Received code</Text>
+                            <Input variant='outline' placeholder='The code' />
+                        </Stack>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button variant='ghost' mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button colorScheme='green'>Save</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
             {editOpen ?
                 <div className={styles.about}>
                     <h2>Informations to know you better</h2>
-                    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-                        <ModalOverlay />
-                        <ModalContent>
-                            <ModalHeader>Setup your Two-factor authentification</ModalHeader>
-                            <ModalCloseButton />
-                            <ModalBody>
-                                <Stack spacing={1}>
-                                    <Text mb='8px'>Phone number</Text>
-                                    <Input variant='outline' placeholder='Your phone number' />
-                                    <Button colorScheme='green' mx="auto" mr="0" mt="10px">Send code</Button>
-                                    <Text mb='8px'>Received code</Text>
-                                    <Input variant='outline' placeholder='The code' />
-                                </Stack>
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button variant='ghost' mr={3} onClick={onClose}>
-                                    Close
-                                </Button>
-                                <Button colorScheme='green'>Save</Button>
-                            </ModalFooter>
-                        </ModalContent>
-                    </Modal>
                     <div className={styles.aboutBox}>
                         <div className={styles.aboutBoxInput}>
                             <label htmlFor="activity_sector">Activity sector</label>
