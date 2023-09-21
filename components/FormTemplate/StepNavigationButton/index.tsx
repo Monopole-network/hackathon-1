@@ -46,7 +46,7 @@ const StepNavigationButton = ({ actualStep, previousPageUrl, nextPageUrl, data }
 					className={styles.button_Next}
 					bg="#03CB88"
 					onClick={() => {
-						console.log("to submit");
+						router.push("/dashboard");
 					}}
 				>
 					Submit
