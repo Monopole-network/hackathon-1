@@ -10,15 +10,15 @@ import Service3Image from "../assets/img/mentor_program.png";
 import Service4Image from "../assets/img/investor_club_support.jpg";
 import LabelImage from "../assets/img/projectTypes/proof_of_impact.png";
 import StepperResponsive from "../components/StepperResponsive";
-import { LogoutIcon, CheckedIcon, LocalisationIcon, WorldIcon, PersonCardIcon, EditIcon } from '../components/Icons';
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, useDisclosure, Input, InputGroup, InputLeftAddon, InputRightAddon, Stack, Textarea, Text } from '@chakra-ui/react'
+import { LogoutIcon, CheckedIcon, LocalisationIcon, WorldIcon, PersonCardIcon, EditIcon, TwoFAIcon } from '../components/Icons';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, useDisclosure, Input, Stack, Text } from '@chakra-ui/react'
+import React, { useState } from 'react';
 
 
 const Dashboard: NextPage = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const { isOpen: isOpenModal1, onOpen: onOpenModal1, onClose: onCloseModal1 } = useDisclosure();
-    const { isOpen: isOpenModal2, onOpen: onOpenModal2, onClose: onCloseModal2 } = useDisclosure();
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [editOpen, setEditOpen] = React.useState<boolean>(false);
 
     return (
         <div className={styles.dashboard}>
@@ -27,6 +27,10 @@ const Dashboard: NextPage = () => {
                     <div className={styles.labelicon}>
                         <Image src={LabelImage} alt="label sticker" />
                     </div>
+                    <button onClick={onOpen}>
+                        <TwoFAIcon height="18px" width="18px" />
+                        <p>2FA</p>
+                    </button>
                     <div className={styles.checkedicon}>
                         <CheckedIcon height="18px" width="18px" />
                         <p>KYB</p>
@@ -58,97 +62,60 @@ const Dashboard: NextPage = () => {
                         <p>PROJECT_HOLDER</p>
                     </div>
                 </div>
+
+                <button className={styles.editButton} onClick={() => setEditOpen(!editOpen)}>
+                    <EditIcon height="18px" width="18px" />
+                    <p>Edit Informations</p>
+                </button>
             </div>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Setup your Two-factor authentification</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Stack spacing={1}>
+                            <Text mb='8px'>Phone number</Text>
+                            <Input variant='outline' placeholder='Your phone number' />
+                            <Button colorScheme='green' mx="auto" mr="0" mt="10px">Send code</Button>
+                            <Text mb='8px'>Received code</Text>
+                            <Input variant='outline' placeholder='The code' />
+                        </Stack>
+                    </ModalBody>
 
-            <div className={styles.about}>
-                <h2>Informations to know you better</h2>
-                <div className={styles.aboutButtons}>
-                    <button className={styles.TwoFAIcon} onClick={onOpenModal2}>
-                        <p>Two-factor authentication</p>
-                    </button>
-                    <button className={styles.editIcon} onClick={onOpenModal1}>
-                        <EditIcon height="18px" width="18px" />
-                        <p>Edit</p>
-                    </button>
-                </div>
-                <Modal isOpen={isOpenModal1} onClose={onCloseModal1} isCentered>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>Edit your informations</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            <Stack spacing={1}>
-                                <Text mb='8px'>Activity sector</Text>
-                                <Input variant='outline' placeholder='Your activity sector' />
-                                <Text mb='8px'>Website URL</Text>
-                                <InputGroup size='sm'>
-                                    <InputLeftAddon>https://</InputLeftAddon>
-                                    <Input placeholder='your website' />
-                                    <InputRightAddon>.com</InputRightAddon>
-                                </InputGroup>
-                                <Text mb='8px'>Creation date of company</Text>
-                                <Input
-                                    placeholder="Your company's creation date"
-                                    size="md"
-                                    type="datetime-local"
-                                />
-                                <Text mb='8px'>Description</Text>
-                                <Textarea placeholder='Here is a description of your company' resize='none' />
-                            </Stack>
-                        </ModalBody>
+                    <ModalFooter>
+                        <Button variant='ghost' mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button colorScheme='green'>Save</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
-                        <ModalFooter>
-                            <Button colorScheme='blue' mr={3} onClick={onCloseModal1}>
-                                Close
-                            </Button>
-                            <Button variant='ghost'>Save</Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
-                <Modal isOpen={isOpenModal2} onClose={onCloseModal2} isCentered>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>Setup your Two-factor authentification</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            <Stack spacing={1}>
-                                <Text mb='8px'>Phone number</Text>
-                                <Input variant='outline' placeholder='Your phone number' />
-                                <Button colorScheme='blue' mx="auto">Send code</Button>
-                            </Stack>
-                            <Stack spacing={1}>
-                                <Text mb='8px'>Received code</Text>
-                                <Input variant='outline' placeholder='The code' />
-                            </Stack>
-                        </ModalBody>
-
-                        <ModalFooter>
-                            <Button colorScheme='blue' mr={3} onClick={onCloseModal2}>
-                                Close
-                            </Button>
-                            <Button variant='ghost'>Save</Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
-                <div className={styles.aboutBox}>
-                    <div className={styles.aboutBoxInput}>
-                        <label htmlFor="activity_sector">Activity sector</label>
-                        <input type="text" id="activity_sector" name="activity_sector" value="your activity sector" disabled />
-                    </div>
-                    <div className={styles.aboutBoxInput}>
-                        <label htmlFor="website_url">Website URL</label>
-                        <input type="text" id="website_url" name="website_url" value="your website URL" disabled />
-                    </div>
-                    <div className={styles.aboutBoxInput}>
-                        <label htmlFor="creation_date">Company&apos;s creation date</label>
-                        <input type="text" id="creation_date" name="creation_date" value="your company's creation date" disabled />
-                    </div>
-                    <div className={styles.aboutBoxInput}>
-                        <label htmlFor="description">Description</label>
-                        <textarea id="description" name="description" disabled>your description</textarea>
+            {editOpen ?
+                <div className={styles.about}>
+                    <h2>Informations to know you better</h2>
+                    <div className={styles.aboutBox}>
+                        <div className={styles.aboutBoxInput}>
+                            <label htmlFor="activity_sector">Activity sector</label>
+                            <input type="text" id="activity_sector" name="activity_sector" placeholder="your activity sector" />
+                        </div>
+                        <div className={styles.aboutBoxInput}>
+                            <label htmlFor="website_url">Website URL</label>
+                            <input type="text" id="website_url" name="website_url" placeholder="your website URL" />
+                        </div>
+                        <div className={styles.aboutBoxInput}>
+                            <label htmlFor="creation_date">Company&apos;s creation date</label>
+                            <input type="text" id="creation_date" name="creation_date" placeholder="your company's creation date" />
+                        </div>
+                        <div className={styles.aboutBoxInput}>
+                            <label htmlFor="description">Description</label>
+                            <textarea id="description" name="description" placeholder="your description"></textarea>
+                        </div>
+                        <Button colorScheme='green'>Save</Button>
                     </div>
                 </div>
-            </div>
+                : null}
 
             <div className={styles.content}>
                 <h2>Choose a service and ask for a dialogue with us about what you want</h2>
