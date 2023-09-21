@@ -24,6 +24,7 @@ const CategoryButton: FC<CategoryButtonProps> = ({ props }) => {
       <Button
         colorScheme={color}
         onClick={() => {
+          dispatch(resetProjects());
           dispatch(resetFilters());
           dispatch(changeType(type));
           dispatch(mapByType(type));

@@ -104,11 +104,12 @@ export const projectsSlice = createSlice({
       return initialState
     },
     mapByType: (state, action: PayloadAction<string>) => {
-      state.map((project) => project.shown = project.type === action.payload)
-      return state
+      const filteredState = state.filter((project) => {
+        return project.type === action.payload;
+      })
+      return filteredState
     },
     mapByODD: (state, action: PayloadAction<string[]>) => {
-      resetProjects();
       if (action.payload.length > 0) {
         state.map((project) => {
           let shownValue = false;
@@ -123,6 +124,13 @@ export const projectsSlice = createSlice({
         })
         return state
       }
+      console.log(action.payload.length);
+
+      state.map((project) => {
+        project.shown = true;
+        return project;
+      })
+      return state
     },
   },
 })

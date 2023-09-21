@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, CardBody, CardHeader, Checkbox, Collapse, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { mapByODD } from "../redux/reducers/projects";
+import { mapByODD, resetProjects } from "../redux/reducers/projects";
 
 const subFilters: Array<object> = [
   {
@@ -74,7 +74,8 @@ const SubFilter: React.FC = () => {
   };
 
   const handleReset: any = () => {
-    setCheckState([]); // Reset check state
+    setCheckState([]);
+    dispatch; // Reset check state
   };
 
   return (
@@ -112,7 +113,13 @@ const SubFilter: React.FC = () => {
               >
                 <SearchIcon />
               </Button>
-              <Button variant="outline" onClick={handleReset}>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setCheckState([]);
+                  dispatch(mapByODD([]));
+                }}
+              >
                 <RepeatIcon />
               </Button>
             </Stack>
