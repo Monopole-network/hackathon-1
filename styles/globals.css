@@ -23,6 +23,10 @@ body {
   background: #0f1318;
 }
 
+.main {
+  position: relative;
+}
+
 .searchBar {
   display: flex;
   gap: 1rem;
@@ -30,14 +34,27 @@ body {
 }
 
 .filters {
+  position: sticky;
+  top: 115px;
+  bottom: 20px;
+  z-index: 1000;
+  margin-top: 1.5rem;
+}
+
+.filters__card {
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.categories {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
   flex-wrap: wrap;
 }
 
 .subfilters {
   margin-top: 1.5rem;
+  gap: 1rem;
 }
 
 .projects {
