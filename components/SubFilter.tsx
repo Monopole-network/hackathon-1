@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, CardBody, CardHeader, Checkbox, Collapse, Stack } from "@chakra-ui/react";
+import { Button, Card, CardBody, CardHeader, Checkbox, Collapse, Grid, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon, RepeatIcon, SearchIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { mapByODD, resetProjects } from "../redux/reducers/projects";
@@ -79,10 +79,10 @@ const SubFilter: React.FC = () => {
   };
 
   return (
-    <>
+    <Grid className="subfilters">
       <Stack direction="row" align="center">
         <Button
-          colorScheme="blue"
+          colorScheme="gray"
           onClick={handleSubFilters}
           rightIcon={isDisplayed ? <ChevronUpIcon /> : <ChevronDownIcon />}
         >
@@ -126,7 +126,7 @@ const SubFilter: React.FC = () => {
           </CardBody>
         </Card>
       </Collapse>
-    </>
+    </Grid>
   );
 };
 
